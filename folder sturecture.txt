@@ -1,0 +1,27 @@
+lib/
+│
+├── core/                # Core functionality and utilities
+│   ├── constants/       # Constants (e.g., colors, dimensions)
+│   ├── utils/           # Utility classes and functions (e.g., formatting, validation)
+│   ├── services/        # Core services (e.g., API clients, local storage)
+│   └── themes/          # App themes and styling
+│
+├── data/                # Data layer
+│   ├── models/          # Data models
+│   ├── repositories/    # Data repositories, data sources (API, local DB)
+│   └── providers/       # Data providers (state management, e.g., using Provider, Riverpod)
+│
+├── domain/              # Business logic layer (optional, if following clean architecture)
+│   ├── entities/        # Business entities
+│   ├── use_cases/       # Business use cases
+│   └── repositories/    # Domain-specific repository interfaces
+│
+├── presentation/        # Presentation layer
+│   ├── screens/         # Screen widgets (one folder per screen)
+│   ├── widgets/         # Reusable widgets (e.g., buttons, forms)
+│   ├── controllers/     # View controllers, state management (e.g., GetX, Bloc)
+│   └── routes/          # App routes
+│
+├── localization/        # Localization files (e.g., for multi-language support)
+│
+└── main.dart            # Main entry point of the application
