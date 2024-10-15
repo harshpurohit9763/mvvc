@@ -2,9 +2,9 @@ import 'package:get/get.dart';
 import 'package:taskify/core/services/themes.dart';
 import 'package:taskify/presentation/controllers/home_screen/notes_controller.dart';
 import 'package:taskify/presentation/controllers/navigation_screen/navigation_Screen_controller.dart';
+import 'package:taskify/presentation/controllers/settings/settings_controller.dart';
 
-
-//dependency injection 
+//dependency injection
 class MyBindings implements Bindings {
   @override
   void dependencies() {
@@ -12,6 +12,7 @@ class MyBindings implements Bindings {
     Get.lazyPut(() => ThemesService());
     // Get.lazyPut(() => HomeScreenController());
     Get.lazyPut(() => NotesController());
+    Get.lazyPut(() => SettingsController());
     // Register other services here
   }
 }

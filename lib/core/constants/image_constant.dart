@@ -29,5 +29,25 @@ class ImageConstants {
   static const imageIcon = "assets/navigation/image.png";
   static const pillIcon = "assets/navigation/pill.jpg";
   static const videoIcon = "assets/navigation/video.png";
-  static const snakeIcon = "assets/navigation/snake.png";
+  static const emptyIcon = "assets/navigation/empty.png";
+  static const trashIcon = "assets/navigation/trash.png";
+  static const saveIcon = "assets/navigation/save.png";
+
+  static const men1 = "assets/profiles/profile1.png";
+  static const men2 = "assets/profiles/profile2.png";
+  static const men3 = "assets/profiles/profile3.png";
+  static const women1 = "assets/profiles/profile4.png";
+  static const women2 = "assets/profiles/profile5.png";
+  static const women3 = "assets/profiles/profile6.png";
+  static const paw = "assets/profiles/paw.png";
+
+  static List profileImages = [
+    men1,
+    men2,
+    men3,
+    women1,
+    women2,
+    women3,
+    paw,
+  ];
 }

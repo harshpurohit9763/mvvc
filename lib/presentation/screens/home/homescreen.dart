@@ -42,6 +42,7 @@ class Homescreen extends StatelessWidget {
                               onTap: () {
                                 // homeController.selectOptionFromTop.value = index;
                                 taskcontroller.isviewMode.value = false;
+
                                 Get.toNamed(RoutesConstants.addNote);
                               },
                               child: DottedBorder(
@@ -92,9 +93,7 @@ class Homescreen extends StatelessWidget {
                           ),
                           GestureDetector(
                             onTap: () {
-                              taskcontroller.tasksOffline.clear();
                               taskcontroller.getAllNotes();
-                              taskcontroller.update();
                             },
                             child: Image(
                               image: const AssetImage(
@@ -115,7 +114,7 @@ class Homescreen extends StatelessWidget {
                                 children: [
                                   Image(
                                     image: AssetImage(
-                                      ImageConstants.snakeIcon,
+                                      ImageConstants.emptyIcon,
                                     ),
                                     fit: BoxFit.cover,
                                     height: 0.2.sh,
@@ -129,7 +128,7 @@ class Homescreen extends StatelessWidget {
                             )
                           : Column(
                               children: List.generate(
-                                taskcontroller.tasksOffline.length,
+                                taskcontroller.tasksOffline.reversed.length,
                                 (index) {
                                   var data = taskcontroller.tasksOffline[index];
                                   return SizedBox(
@@ -139,6 +138,7 @@ class Homescreen extends StatelessWidget {
                                       onTap: () {
                                         taskcontroller.selectedNote.value =
                                             index;
+
                                         taskcontroller.openNote();
                                       },
                                       child: Card(

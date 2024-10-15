@@ -2,8 +2,9 @@ import 'dart:async';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:taskify/data/offlineData/profile_shared_prefs.dart';
 
-class OnboardingAndLoginController extends GetxService {
+class OnboardingAndLoginController extends GetxController {
   RxInt slideIndex = 0.obs;
   RxBool isNextCompleted = false.obs;
   RxBool isHidden = false.obs;
@@ -12,6 +13,9 @@ class OnboardingAndLoginController extends GetxService {
   // RxDouble leftpadding = (0.05.sw).obs;
   // RxDouble topPadding = (0.05.sw).obs;
 
+  RxInt selectedProfile = ProfileSharedPrefs.profilePictureGet() != null
+      ? RxInt(ProfileSharedPrefs.profilePictureGet())
+      : 0.obs;
   List loginText = [
     "Email",
     "Password",

@@ -19,7 +19,7 @@ void main() async {
 
   // getinstance() async {
   AppConstants.taskSharedPrefs = await SharedPreferences.getInstance();
-  AppConstants.draftMemos = await SharedPreferences.getInstance();
+  AppConstants.profileData = await SharedPreferences.getInstance();
   // }
 }
 
@@ -40,17 +40,18 @@ class MyApp extends StatelessWidget {
             themeMode:
                 themesService.isDark.value ? ThemeMode.dark : ThemeMode.light,
             theme:
-            //  ThemeData(
-            //   useMaterial3: true,
-            // ),
-            //  AppTheme.lightTheme(),
-            themesService.isDark.value
-                ? ThemeData.dark(
-                    useMaterial3: true,
-                  )
-                : ThemeData.light(
-                    useMaterial3: true,
-                  ),
+                //  ThemeData(
+                //   useMaterial3: true,
+                // ),
+                //  AppTheme.lightTheme(),
+
+                themesService.isDark.value
+                    ? ThemeData.dark(
+                        useMaterial3: true,
+                      )
+                    : ThemeData.light(
+                        useMaterial3: true,
+                      ),
             // home: Onboardingscreen(),
             initialRoute: AppPages.initial,
             getPages: AppPages.routes,

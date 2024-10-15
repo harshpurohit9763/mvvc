@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
@@ -6,13 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:taskify/core/constants/app_constants.dart';
 import 'package:taskify/core/constants/colour_constants.dart';
 import 'package:taskify/core/constants/extensions/fonts_extensaions.dart';
 import 'package:taskify/core/constants/extensions/padding_extensions.dart';
 import 'package:taskify/core/constants/image_constant.dart';
 import 'package:taskify/presentation/controllers/home_screen/notes_controller.dart';
-import 'package:taskify/presentation/screens/note_screen/dilouge.dart';
+import 'package:taskify/presentation/widgets/dilouge.dart';
 
 class AddNoteScreen extends StatelessWidget {
   AddNoteScreen({super.key});
@@ -24,7 +22,7 @@ class AddNoteScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(
       () => notescontroller.isloading.value
-          ? Center(
+          ? const Center(
               child: CircularProgressIndicator(),
             )
           : Form(
@@ -44,28 +42,30 @@ class AddNoteScreen extends StatelessWidget {
                                 onPressed: () {
                                   notescontroller.closenote();
                                 },
-                                icon: Icon(Icons.arrow_back),
+                                icon: const Icon(Icons.arrow_back),
                               ),
                               Row(
                                 children: [
                                   notescontroller.isviewMode.value
                                       ? IconButton(
-                                          onPressed: () {},
-                                          icon: Icon(Icons.delete))
-                                      : Container(),
-                                  notescontroller.isviewMode.value
-                                      ? IconButton(
                                           onPressed: () {
-                                            notescontroller.isEditMode.value ==
-                                                true;
-                                            notescontroller.update();
+                                            notescontroller.deleteNote();
                                           },
-                                          icon: Image(
-                                            image: AssetImage(
-                                                ImageConstants.editIcon),
-                                            height: AppConstants.iconSizesmall,
-                                          ))
+                                          icon: const Icon(Icons.delete))
                                       : Container(),
+                                  // notescontroller.isviewMode.value
+                                  //     ? IconButton(
+                                  //         onPressed: () {
+                                  //           notescontroller.isEditMode.value ==
+                                  //               true;
+                                  //           notescontroller.update();
+                                  //         },
+                                  //         icon: Image(
+                                  //           image: AssetImage(
+                                  //               ImageConstants.editIcon),
+                                  //           height: AppConstants.iconSizesmall,
+                                  //         ))
+                                  //     : Container(),
                                   PopupMenuButton(
                                     itemBuilder: (context) {
                                       return [
@@ -114,9 +114,10 @@ class AddNoteScreen extends StatelessWidget {
                                                                       BorderRadius
                                                                           .circular(
                                                                               15.r),
-                                                                  color: Color(
-                                                                      int.parse(
-                                                                          "0xFFFF${internal + 3}${internal + 4}${internal + 5}${internal + 6}")),
+                                                                  color: notescontroller
+                                                                      .getRandomColor()
+                                                                      .withOpacity(
+                                                                          0.3),
                                                                 ),
                                                                 child: Padding(
                                                                   padding:
@@ -226,7 +227,7 @@ class AddNoteScreen extends StatelessWidget {
                                                                           scrollDirection:
                                                                               Axis.horizontal,
                                                                           physics:
-                                                                              NeverScrollableScrollPhysics(),
+                                                                              const NeverScrollableScrollPhysics(),
                                                                           child:
                                                                               Row(
                                                                             children:
@@ -284,7 +285,7 @@ class AddNoteScreen extends StatelessWidget {
                                                                             scrollDirection:
                                                                                 Axis.horizontal,
                                                                             physics:
-                                                                                NeverScrollableScrollPhysics(),
+                                                                                const NeverScrollableScrollPhysics(),
                                                                             child:
                                                                                 Row(
                                                                               children: List.generate(
@@ -386,7 +387,9 @@ class AddNoteScreen extends StatelessWidget {
                   floatingActionButton: GestureDetector(
                     onTap: () {
                       if (notesKey.currentState!.validate()) {
-                        notescontroller.addNoteToStorage();
+                        notescontroller.isEditMode.value
+                            ? notescontroller.updateNoteToStorage()
+                            : notescontroller.addNoteToStorage();
                         notescontroller.update();
                       }
                     },
@@ -399,29 +402,27 @@ class AddNoteScreen extends StatelessWidget {
                             topRight: Radius.circular(10.r),
                           ),
                           color: ColourConstants.buttonColor),
-                      child: Obx(
-                        () => Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            notescontroller.isEditMode.value
+                                ? "update"
+                                : "Save",
+                            style: GoogleFontsExtensation.buttonTextBold,
+                          ),
+                          SizedBox(
+                            width: 5.w,
+                          ),
+                          Image(
+                            image: AssetImage(
                               notescontroller.isEditMode.value
-                                  ? "update"
-                                  : "Save",
-                              style: GoogleFontsExtensation.buttonTextBold,
+                                  ? ImageConstants.checkIcon
+                                  : notescontroller.addOptionsIcons[1],
                             ),
-                            SizedBox(
-                              width: 5.w,
-                            ),
-                            Image(
-                              image: AssetImage(
-                                notescontroller.isEditMode.value
-                                    ? ImageConstants.checkIcon
-                                    : notescontroller.addOptionsIcons[1],
-                              ),
-                              height: 25.h,
-                            ),
-                          ],
-                        ),
+                            height: 25.h,
+                          ),
+                        ],
                       ),
                     ),
                   ),

@@ -175,6 +175,12 @@ class GoogleFontsExtensation extends TextStyle {
       fontSize: 36.sp, // ScreenUtil responsive size
       fontWeight: FontWeight.bold,
       color: Colors.black);
+
+  static TextStyle get alertSmall => GoogleFonts.montserrat(
+      fontSize: 14.sp, // ScreenUtil responsive size
+      color: Colors.red
+      // fontWeight: FontWeight.w500,
+      );
   //////////////////////////////////////////////////////
 
   // static TextStyle get headingBigDark => GoogleFonts.montserrat(
